@@ -15,25 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
 
-    <script>
-        window.addEventListener('scroll', function() {
-        // Sayfadaki tüm section (bölüm) etiketlerini bul
-        const sections = document.querySelectorAll('section');
-
-        sections.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        const viewHeight = window.innerHeight;`
     
-        // Bölüm ekranın ne kadar üstündeyse o kadar şeffaf olsun`
-        // 0 tamamen görünmez, 1 tamamen somut`
-        let opacity = 1 - (Math.abs(rect.top) / (viewHeight / 1.5));`
-    
-        // Opacity değerinin 0 ile 1 arasında kalmasını sağla`
-        if (opacity < 0) opacity = 0;
-        if (opacity > 1) opacity = 1;
-    
-        section.style.opacity = opacity;}); });
-    </script>
     <style>
         /* Footer'ı aşağı itmek için gerekli yapı */
         body {
@@ -144,5 +126,27 @@
             </div>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hamburger Menü Tamiri
+            const toggler = document.querySelector('.navbar-toggler');
+            const collapse = document.querySelector('#navbarNav');
+            if(toggler && collapse) {
+                toggler.onclick = function() {
+                    collapse.classList.toggle('show');
+                };
+            }
+
+            // Sayfa açılış animasyonu
+            const content = document.querySelector('.main-content');
+            if(content) {
+                content.style.opacity = "0";
+                content.style.transition = "opacity 1s ease-out";
+                setTimeout(() => content.style.opacity = "1", 100);
+            }
+        });
+    </script>
 </body>
 </html>
