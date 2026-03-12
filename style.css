@@ -438,20 +438,23 @@ a:visited {
     display: inline-block;
 }
 
-/* 1. Hamburger ve Çarpı İkonunu Senin Pembe Renginle Sabitle */
-.navbar-toggler .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23FF6B6B' stroke-width='3' stroke-linecap='round' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
-    transition: all 0.3s ease-in-out;
-}
-
-/* 2. Menü Açıldığında Çarpıya Dönüşsün */
-.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23FF6B6B' stroke-width='3' stroke-linecap='round' d='M8 8l16 16M8 24L24 8'/%3E%3C/svg%3E") !important;
-}
-
-/* 3. O Çirkin Gri Çerçeveyi Yok Et */
-.navbar-toggler, .navbar-toggler:focus, .navbar-toggler:active {
+/* 1. Butonu en öne çıkar ve border'ı tamamen sil */
+.navbar-toggler {
+    z-index: 2500 !important; /* Menü panelinden (2000) daha yüksek olmalı */
     border: none !important;
     box-shadow: none !important;
     outline: none !important;
+    padding: 0 !important; /* Etrafındaki gereksiz boşluğu alır */
+}
+
+/* 2. İkonun rengini ve şeklini koru */
+.navbar-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23FF6B6B' stroke-width='3' stroke-linecap='round' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+    width: 30px;
+    height: 30px;
+}
+
+/* 3. Menü açıkken çarpı hali (Yine en üstte) */
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23FF6B6B' stroke-width='3' stroke-linecap='round' d='M8 8l16 16M8 24L24 8'/%3E%3C/svg%3E") !important;
 }
