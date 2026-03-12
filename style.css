@@ -4,7 +4,23 @@
     --dark: #1A1A2E;
 }
 html { scroll-behavior: smooth !important; }
-body { font-family: 'Outfit', sans-serif; }
+body {
+    font-family: 'Outfit', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6;
+    overflow-x: hidden;
+
+    /* SAYFAYI %75 ORANINDA KÜÇÜLTÜR (İDEAL GÖRÜNTÜ) */
+    zoom: 0.75; /* Chrome, Edge, Safari */
+}
+
+/* Firefox'ta oluşabilecek genişlik kaymasını engellemek için */
+@-moz-document url-prefix() {
+    body {
+        width: 133.33%; /* 1 / 0.75 */
+    }
+}
 
 /* Font Büyüklükleri */
 .hero-title {
@@ -23,6 +39,10 @@ body { font-family: 'Outfit', sans-serif; }
 }
 
 .section { opacity: 1 !important; transition: none !important; }
+
+.fadeIn-section {
+    animation: fadeInUp 1.5s ease-out;
+}
 
 /* Kart Tasarımı (3D Flip) */
 .course-card { width: 320px; height: 400px; perspective: 1000px; }

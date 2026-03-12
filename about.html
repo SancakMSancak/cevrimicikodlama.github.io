@@ -15,24 +15,33 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <script>
-        window.addEventListener('scroll', function() {
-        // Sayfadaki tüm section (bölüm) etiketlerini bul
-        const sections = document.querySelectorAll('section');
+    function animasyonuGuncelle() {
+        const bolumler = document.querySelectorAll('section');
 
-        sections.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        const viewHeight = window.innerHeight;`
+        bolumler.forEach(bolum => {
+            const mesafe = bolum.getBoundingClientRect();
+            const ekranBoyu = window.innerHeight;
+            
+            // Bölüm ekrana ne kadar girdiyse o kadar görünür olsun
+            let gorunurluk = 1 - (mesafe.top / (ekranBoyu / 1.3));
+            
+            if (gorunurluk < 0) gorunurluk = 0;
+            if (gorunurluk > 1) gorunurluk = 1;
+
+            bolum.style.opacity = gorunurluk;
+            bolum.style.transition = "opacity 0.7s ease-out, transform 0.7s ease-out";
+            // Hafif bir yukarı süzülme efekti ekleyelim (dışarıdan içeri hissi için)
+            bolum.style.transform = `translateY(${(1 - gorunurluk) * 30}px)`;
+        });
+        }
+
+        // Kullanıcı sayfayı kaydırdığında çalışsın
+        window.addEventListener('scroll', animasyonuGuncelle);
     
-        // Bölüm ekranın ne kadar üstündeyse o kadar şeffaf olsun`
-        // 0 tamamen görünmez, 1 tamamen somut`
-        let opacity = 1 - (Math.abs(rect.top) / (viewHeight / 1.5));`
-    
-        // Opacity değerinin 0 ile 1 arasında kalmasını sağla`
-        if (opacity < 0) opacity = 0;
-        if (opacity > 1) opacity = 1;
-    
-        section.style.opacity = opacity;}); });
+        // Sayfa ilk açıldığında veya bir linke tıklandığında da hemen çalışsın
+        window.addEventListener('load', animasyonuGuncelle);
     </script>
+
     <style>
         /* Footer'ı aşağı itmek için gerekli yapı */
         body {
@@ -86,13 +95,13 @@
             </div>
         </div>
     </nav>
-    <section id="about" class="container-fluid bg-light py-5">
+    <section id="about" class="fadeIn-section container-fluid bg-light py-5">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-4 text-center mb-4">
                     <img src="ben.jpg" alt="Mustafa Sancak" class="rounded-circle shadow" style="width: 250px; height: 250px; object-fit: cover; border: 8px solid white;">
                 </div>
-                <div class="col-md-8 mt-4 pt-3">
+                <div class="col-md-8 mt-5 pt-4">
                     <h2 class="fw-bold mb-3" style="color: #1e3a5f;">Merhaba, Ben Mustafa Sancak</h2>
                     <h5 class="text-primary mb-4">İçerik Geliştirme Uzmanı & Robotik ve Kodlama Eğitmeni</h5>
                 
@@ -114,7 +123,7 @@
             </div>
         </div>
     </section>
-    <section id="experience" class="container py-5">
+    <section id="experience" class="fadeIn-section container py-5">
         <div class="text-center mb-5">
             <h2 class="fw-bold" style="color: #1e3a5f;">Eğitmenlik ve Sosyal Sorumluluk Deneyimlerim</h2>
             <div style="width: 50px; height: 3px; background: #4ECDC4; margin: 10px auto;"></div>
