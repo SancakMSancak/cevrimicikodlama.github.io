@@ -19,22 +19,17 @@
 
     <script>
         window.addEventListener('scroll', function() {
-        // Sayfadaki tüm section (bölüm) etiketlerini bul
-        const sections = document.querySelectorAll('section');
-
-        sections.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        const viewHeight = window.innerHeight;`
-    
-        // Bölüm ekranın ne kadar üstündeyse o kadar şeffaf olsun`
-        // 0 tamamen görünmez, 1 tamamen somut`
-        let opacity = 1 - (Math.abs(rect.top) / (viewHeight / 1.5));`
-    
-        // Opacity değerinin 0 ile 1 arasında kalmasını sağla`
-        if (opacity < 0) opacity = 0;
-        if (opacity > 1) opacity = 1;
-    
-        section.style.opacity = opacity;}); });
+            if (window.innerWidth <= 768) return; // Mobilde kaydırma opaklık animasyonunu kapat
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const viewHeight = window.innerHeight;
+                let opacity = 1 - (Math.abs(rect.top) / (viewHeight / 1.5));
+                if (opacity < 0) opacity = 0;
+                if (opacity > 1) opacity = 1;
+                section.style.opacity = opacity;
+            });
+        });
     </script>
 </head>
 <body>
