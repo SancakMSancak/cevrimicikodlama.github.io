@@ -168,10 +168,28 @@
 
             window.addEventListener('scroll', updateButton);
             btn.addEventListener('click', function() {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                smoothScrollToTop(600);
             });
+
+            function smoothScrollToTop(duration) {
+                var start = window.scrollY || window.pageYOffset;
+                var startTime = performance.now();
+
+                function scroll() {
+                    var now = performance.now();
+                    var time = Math.min(1, ((now - startTime) / duration));
+                    var eased = 1 - Math.pow(1 - time, 3);
+                    window.scrollTo(0, Math.floor(start * (1 - eased)));
+                    if (time < 1) {
+                        requestAnimationFrame(scroll);
+                    }
+                }
+
+                requestAnimationFrame(scroll);
+            }
 
             updateButton();
         })();
     </script></body>
 </html>
+
