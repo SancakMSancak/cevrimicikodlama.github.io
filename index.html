@@ -149,5 +149,29 @@
             </div>
         </div>
     </footer>
-</body>
+    <script>
+        (function() {
+            var btn = document.createElement('button');
+            btn.className = 'scroll-to-top';
+            btn.type = 'button';
+            btn.title = 'Yukarı çık';
+            btn.innerHTML = '<i class="fas fa-chevron-up"></i>';
+            document.body.appendChild(btn);
+
+            function updateButton() {
+                if (window.scrollY > 220) {
+                    btn.classList.add('show');
+                } else {
+                    btn.classList.remove('show');
+                }
+            }
+
+            window.addEventListener('scroll', updateButton);
+            btn.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            updateButton();
+        })();
+    </script></body>
 </html>
